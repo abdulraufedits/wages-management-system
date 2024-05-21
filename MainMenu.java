@@ -61,6 +61,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(422, Short.MAX_VALUE))
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Welcome Admin!");
 
         javax.swing.GroupLayout pnl_mainLayout = new javax.swing.GroupLayout(pnl_main);
@@ -70,7 +71,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(pnl_mainLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(566, Short.MAX_VALUE))
         );
         pnl_mainLayout.setVerticalGroup(
             pnl_mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
