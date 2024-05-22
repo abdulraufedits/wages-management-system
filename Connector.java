@@ -1,4 +1,4 @@
-package studentenrolment;
+package wagesmanagementsystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class Connector {
 
-    private static final String dLoc = "jdbc:ucanaccess://DemoDb.accdb";
+    private static final String dLoc = "jdbc:ucanaccess://WMSDB.accdb";
     Connection conn;
     PreparedStatement prep;
     ResultSet rs;
@@ -28,6 +28,7 @@ public class Connector {
     public ResultSet runSelect(String query) {
         try {
             prep = conn.prepareStatement(query);
+            
             rs = prep.executeQuery();// only for select queries
             System.out.println("Query executed successfully");
             return rs;
