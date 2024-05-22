@@ -458,7 +458,7 @@ public class MainMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Username or password is incorrect");
             } else{
                 JOptionPane.showMessageDialog(this, "Logged in as " + user +": " + name);
-                EmployeeUI empUI = new EmployeeUI();
+                EmployeeUI empUI = new EmployeeUI(name, pass);
                 empUI.pack();
                 empUI.setVisible(true);
                 this.setVisible(false);
