@@ -506,9 +506,13 @@ public class MainMenu extends javax.swing.JFrame {
         String pass = String.valueOf(txt_pass.getPassword());
         if(user.equals("employee")){
             c.runDML("INSERT INTO employee (id, empname,pass, salary) values(0,'"+name+"','"+pass+"',0)");
+            JOptionPane.showMessageDialog(this, "You have successfully registered. Please login to continue.");
+            frame_reg.setVisible(false);
 
         } else if(user.equals("manager")){
             c.runDML("INSERT INTO manager (id, managername,pass, salary) values(0,'"+name+"','"+pass+"',0)");
+            JOptionPane.showMessageDialog(this, "You have successfully registered. Please login to continue.");
+            frame_reg.setVisible(false);
 
         }
     }//GEN-LAST:event_btn_reg1ActionPerformed

@@ -6,9 +6,11 @@
 package wagesmanagementsystem;
 
 import java.awt.Color;
-import java.lang.String;
 import java.sql.SQLException;
+import java.sql.ResultSetMetaData;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author spring2018
@@ -16,8 +18,6 @@ import javax.swing.JOptionPane;
 public class EmployeeUI extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeUI
-     * @param name
-     * @param pass
      */
     
     public EmployeeUI() {
@@ -34,11 +34,24 @@ public class EmployeeUI extends javax.swing.JFrame {
          try {
             c.prep = c.conn.prepareStatement("SELECT * from employee WHERE empname= '"+name+"' AND pass='"+pass+"'");
             c.rs = c.prep.executeQuery();
-            while(c.rs.next()){
-                txt_id.setText(String.valueOf(c.rs.getInt(1)));
-                txt_sal.setText(String.valueOf(c.rs.getDouble(4)));
-                System.out.println("Query executed successfully");
+            if(c.rs.next()){
+                txt_id.setText(String.valueOf(c.rs.getString("id")));
+            txt_sal.setText("$" + String.valueOf(c.rs.getString("salary")));
             }
+        } catch (SQLException e) {
+            System.out.println("Problem while executing query");
+            System.out.println(e.getMessage());
+        }
+        try{
+            c.prep =c.conn.prepareStatement("SELECT * from employee");
+            c.rs = c.prep.executeQuery();
+            String id_temp = String.valueOf(c.rs.getString("id"));
+            String username_temp = c.rs.getString("empname");
+            String salaries_temp = String.valueOf(c.rs.getString("salary"));
+            String[] tbData = {id_temp,username_temp,salaries_temp};
+            
+            DefaultTableModel tblModel = (DefaultTableModel)garmentsTable.getModel();
+            tblModel.addRow(tbData);
             
         } catch (SQLException e) {
             System.out.println("Problem while executing query");
@@ -68,7 +81,7 @@ public class EmployeeUI extends javax.swing.JFrame {
         garmentsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        garmentsTable = new javax.swing.JTable();
         accPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -169,26 +182,7 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Garments");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "garmentno", "brand", "color", "type", "quality", "cost"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(garmentsTable);
 
         javax.swing.GroupLayout garmentsPanelLayout = new javax.swing.GroupLayout(garmentsPanel);
         garmentsPanel.setLayout(garmentsPanelLayout);
@@ -223,6 +217,17 @@ public class EmployeeUI extends javax.swing.JFrame {
         txt_name_current.setEditable(false);
 
         btn_update_name.setText("change name");
+        btn_update_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_update_nameActionPerformed(evt);
+            }
+        });
+
+        txt_name_new.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_name_newActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Password");
@@ -230,6 +235,11 @@ public class EmployeeUI extends javax.swing.JFrame {
         txt_pass_current.setEditable(false);
 
         btn_update_pass.setText("change password");
+        btn_update_pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_update_passActionPerformed(evt);
+            }
+        });
 
         btn_del_acc.setBackground(new java.awt.Color(255, 0, 51));
         btn_del_acc.setForeground(new java.awt.Color(255, 255, 255));
@@ -306,7 +316,7 @@ public class EmployeeUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -435,9 +445,53 @@ public class EmployeeUI extends javax.swing.JFrame {
         btn_garments.setForeground(Color.white);
         btn_home.setBackground(new java.awt.Color(230,230,230));
         btn_home.setForeground(Color.gray);
-        btn_garments.setBackground(new java.awt.Color(230,230,230));
-        btn_garments.setForeground(Color.gray);
+        btn_acc.setBackground(new java.awt.Color(230,230,230));
+        btn_acc.setForeground(Color.gray);
     }//GEN-LAST:event_btn_garmentsActionPerformed
+
+    private void btn_update_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_nameActionPerformed
+        Connector c = new Connector();
+        try {
+            c.prep = c.conn.prepareStatement("UPDATE employee SET empname=? WHERE empname = '"+txt_name_current.getText()+"'");
+            int res = JOptionPane.showConfirmDialog(accPanel, "Are you sure want to change your name?");
+            if(res == 0){
+                c.prep.setString(1,txt_name_new.getText());//for for insert update delete queries
+            c.prep.executeUpdate();
+            System.out.println("Record updated successfully");
+            txt_name_current.setText(txt_name_new.getText());
+            } else {
+                System.out.println("No action taken.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Problem while inserting Record");
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_btn_update_nameActionPerformed
+
+    private void txt_name_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_name_newActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_name_newActionPerformed
+
+    private void btn_update_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_passActionPerformed
+        Connector c = new Connector();
+        try {
+            c.prep = c.conn.prepareStatement("UPDATE employee SET pass=? WHERE pass = '"+txt_pass_current.getText()+"'");
+            int res = JOptionPane.showConfirmDialog(accPanel, "Are you sure want to change your password?");
+            if(res == 0){
+                c.prep.setString(1,txt_pass_new.getText());//for for insert update delete queries
+            c.prep.executeUpdate();
+            System.out.println("Record updated successfully");
+            txt_pass_current.setText(txt_pass_new.getText());
+            } else {
+                System.out.println("No action taken.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Problem while inserting Record");
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btn_update_passActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,6 +538,7 @@ public class EmployeeUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_update_pass;
     private javax.swing.JPanel empPanel;
     private javax.swing.JPanel garmentsPanel;
+    private javax.swing.JTable garmentsTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -494,7 +549,6 @@ public class EmployeeUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
