@@ -7,9 +7,6 @@ package wagesmanagementsystem;
 
 import java.awt.Color;
 import java.sql.SQLException;
-import java.sql.ResultSetMetaData;
-import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -42,16 +39,25 @@ public class EmployeeUI extends javax.swing.JFrame {
             System.out.println("Problem while executing query");
             System.out.println(e.getMessage());
         }
+         Connector c2 = new Connector();
         try{
-            c.prep =c.conn.prepareStatement("SELECT * from employee");
-            c.rs = c.prep.executeQuery();
-            String id_temp = String.valueOf(c.rs.getString("id"));
-            String username_temp = c.rs.getString("empname");
-            String salaries_temp = String.valueOf(c.rs.getString("salary"));
-            String[] tbData = {id_temp,username_temp,salaries_temp};
+            c2.prep =c2.conn.prepareStatement("SELECT * from garment");
+            c2.rs = c2.prep.executeQuery();
+            
+            while(c2.rs.next()){
+                String garmentno = c2.rs.getString("garmentno");
+            String brand = c2.rs.getString("brand");
+            String color = c2.rs.getString("color");
+            String type = c2.rs.getString("type");
+            String quality = c2.rs.getString("quality");
+            String cost = c2.rs.getString("cost");
+            String[] tbData = {garmentno, brand, color, type, quality, cost};
             
             DefaultTableModel tblModel = (DefaultTableModel)garmentsTable.getModel();
             tblModel.addRow(tbData);
+            
+            }
+            
             
         } catch (SQLException e) {
             System.out.println("Problem while executing query");
@@ -98,7 +104,7 @@ public class EmployeeUI extends javax.swing.JFrame {
         btn_garments = new javax.swing.JButton();
         btn_acc = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menu_logout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,6 +188,29 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Garments");
 
+        garmentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "garmentno", "brand", "color", "type", "quality", "cost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(garmentsTable);
 
         javax.swing.GroupLayout garmentsPanelLayout = new javax.swing.GroupLayout(garmentsPanel);
@@ -223,12 +252,6 @@ public class EmployeeUI extends javax.swing.JFrame {
             }
         });
 
-        txt_name_new.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_name_newActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Password");
 
@@ -244,6 +267,11 @@ public class EmployeeUI extends javax.swing.JFrame {
         btn_del_acc.setBackground(new java.awt.Color(255, 0, 51));
         btn_del_acc.setForeground(new java.awt.Color(255, 255, 255));
         btn_del_acc.setText("Delete account");
+        btn_del_acc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_accActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout accPanelLayout = new javax.swing.GroupLayout(accPanel);
         accPanel.setLayout(accPanelLayout);
@@ -381,8 +409,13 @@ public class EmployeeUI extends javax.swing.JFrame {
                 .addContainerGap(263, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Logout");
-        jMenuBar1.add(jMenu1);
+        menu_logout.setText("Logout");
+        menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_logoutMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menu_logout);
 
         setJMenuBar(jMenuBar1);
 
@@ -414,84 +447,49 @@ public class EmployeeUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_accActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_accActionPerformed
-         garmentsPanel.setVisible(false);
-        accPanel.setVisible(true);
-        empPanel.setVisible(false);
-        btn_acc.setBackground(new java.awt.Color(102, 102, 255));
-        btn_acc.setForeground(Color.white);
-        btn_home.setBackground(new java.awt.Color(230,230,230));
-        btn_home.setForeground(Color.gray);
-        btn_garments.setBackground(new java.awt.Color(230,230,230));
-        btn_garments.setForeground(Color.gray);
+        garmentsPanel.setVisible(false);
+        accPanel.setVisible(true);empPanel.setVisible(false);
+        btn_acc.setBackground(new java.awt.Color(102, 102, 255));btn_acc.setForeground(Color.white);btn_home.setBackground(new java.awt.Color(230,230,230));
+        btn_home.setForeground(Color.gray);btn_garments.setBackground(new java.awt.Color(230,230,230));btn_garments.setForeground(Color.gray);
     }//GEN-LAST:event_btn_accActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
-        garmentsPanel.setVisible(false);
-        accPanel.setVisible(false);
+        garmentsPanel.setVisible(false);accPanel.setVisible(false);
         empPanel.setVisible(true);
-        btn_home.setBackground(new java.awt.Color(102, 102, 255));
-        btn_home.setForeground(Color.white);
-        btn_garments.setBackground(new java.awt.Color(230,230,230));
-        btn_garments.setForeground(Color.gray);
-        btn_acc.setBackground(new java.awt.Color(230,230,230));
-        btn_acc.setForeground(Color.gray);
+        btn_home.setBackground(new java.awt.Color(102, 102, 255));btn_home.setForeground(Color.white);
+        btn_garments.setBackground(new java.awt.Color(230,230,230));btn_garments.setForeground(Color.gray);btn_acc.setBackground(new java.awt.Color(230,230,230));btn_acc.setForeground(Color.gray);
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_garmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_garmentsActionPerformed
-        accPanel.setVisible(false);
-        empPanel.setVisible(false);
-         garmentsPanel.setVisible(true);
-        btn_garments.setBackground(new java.awt.Color(102, 102, 255));
-        btn_garments.setForeground(Color.white);
-        btn_home.setBackground(new java.awt.Color(230,230,230));
-        btn_home.setForeground(Color.gray);
-        btn_acc.setBackground(new java.awt.Color(230,230,230));
-        btn_acc.setForeground(Color.gray);
+        accPanel.setVisible(false); empPanel.setVisible(false);
+        garmentsPanel.setVisible(true);
+        btn_garments.setBackground(new java.awt.Color(102, 102, 255));btn_garments.setForeground(Color.white);
+        btn_home.setBackground(new java.awt.Color(230,230,230));btn_home.setForeground(Color.gray);btn_acc.setBackground(new java.awt.Color(230,230,230));btn_acc.setForeground(Color.gray);
     }//GEN-LAST:event_btn_garmentsActionPerformed
 
     private void btn_update_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_nameActionPerformed
         Connector c = new Connector();
-        try {
-            c.prep = c.conn.prepareStatement("UPDATE employee SET empname=? WHERE empname = '"+txt_name_current.getText()+"'");
-            int res = JOptionPane.showConfirmDialog(accPanel, "Are you sure want to change your name?");
-            if(res == 0){
-                c.prep.setString(1,txt_name_new.getText());//for for insert update delete queries
-            c.prep.executeUpdate();
-            System.out.println("Record updated successfully");
-            txt_name_current.setText(txt_name_new.getText());
-            } else {
-                System.out.println("No action taken.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem while inserting Record");
-            System.out.println(e.getMessage());
-        }
-        
+        c.runUpdate("UPDATE employee SET empname=? WHERE empname = '"+txt_name_current.getText()+"'", txt_name_current.getText(), txt_name_new.getText(), accPanel,"name");
+        txt_name_current.setText(txt_name_new.getText());
         
     }//GEN-LAST:event_btn_update_nameActionPerformed
 
-    private void txt_name_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_name_newActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_name_newActionPerformed
-
     private void btn_update_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_passActionPerformed
         Connector c = new Connector();
-        try {
-            c.prep = c.conn.prepareStatement("UPDATE employee SET pass=? WHERE pass = '"+txt_pass_current.getText()+"'");
-            int res = JOptionPane.showConfirmDialog(accPanel, "Are you sure want to change your password?");
-            if(res == 0){
-                c.prep.setString(1,txt_pass_new.getText());//for for insert update delete queries
-            c.prep.executeUpdate();
-            System.out.println("Record updated successfully");
-            txt_pass_current.setText(txt_pass_new.getText());
-            } else {
-                System.out.println("No action taken.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem while inserting Record");
-            System.out.println(e.getMessage());
-        }
+        c.runUpdate("UPDATE employee SET pass=? WHERE pass = '"+txt_pass_current.getText()+"'", txt_pass_current.getText(), txt_pass_new.getText(), accPanel, "password");
+        txt_pass_current.setText(txt_pass_new.getText());
     }//GEN-LAST:event_btn_update_passActionPerformed
+
+    private void btn_del_accActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_accActionPerformed
+        Connector c=new Connector();
+        c.runDelAcc("DELETE FROM employee WHERE empname='"+ txt_name_current.getText() +"' AND pass= '"+ txt_pass_current.getText()+"'", this, accPanel);       
+        
+    }//GEN-LAST:event_btn_del_accActionPerformed
+
+    private void menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_logoutMouseClicked
+        new MainMenu().setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_menu_logoutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -545,13 +543,13 @@ public class EmployeeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
+    private javax.swing.JMenu menu_logout;
     private javax.swing.JPanel sidebar;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_name;

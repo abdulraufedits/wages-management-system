@@ -1,6 +1,5 @@
 package wagesmanagementsystem;
 
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /*
@@ -61,7 +60,7 @@ public class MainMenu extends javax.swing.JFrame {
         reg_manager = new javax.swing.JButton();
         btn_reg_emp = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menu_admin = new javax.swing.JMenu();
 
         panel_login.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -87,12 +86,6 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel5.setText("username");
 
         jLabel6.setText("password");
-
-        txt_pass_login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_pass_loginActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -247,7 +240,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(117, 117, 117)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108))
         );
         panel_regLayout.setVerticalGroup(
@@ -314,7 +307,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        reg_manager.setBackground(new java.awt.Color(255, 255, 255));
         reg_manager.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         reg_manager.setForeground(new java.awt.Color(102, 102, 255));
         reg_manager.setText("Register as manager");
@@ -326,7 +318,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        btn_reg_emp.setBackground(new java.awt.Color(255, 255, 255));
         btn_reg_emp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_reg_emp.setForeground(new java.awt.Color(102, 102, 255));
         btn_reg_emp.setText("Register as employee");
@@ -392,8 +383,13 @@ public class MainMenu extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Login as Admin");
-        jMenuBar1.add(jMenu1);
+        menu_admin.setText("Login as Admin");
+        menu_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_adminMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menu_admin);
 
         setJMenuBar(jMenuBar1);
 
@@ -444,78 +440,31 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         Connector c= new Connector();
-        String name = txt_name_login.getText();
-        String pass = String.valueOf(txt_pass_login.getPassword());
-        if(user.equals("employee")){
-            try {
-            c.prep = c.conn.prepareStatement("SELECT empname, pass from employee WHERE empname= ? AND pass= ?");
-            c.prep.setString(1, name);
-            c.prep.setString(2,pass);
-            c.rs = c.prep.executeQuery();// only for select queries
-            System.out.println("Query executed successfully");
-            if(!c.rs.next()){
-                System.out.println("Username or password is incorrect.");
-                JOptionPane.showMessageDialog(this, "Username or password is incorrect");
-            } else{
-                JOptionPane.showMessageDialog(this, "Logged in as " + user +": " + name);
-                EmployeeUI empUI = new EmployeeUI(name, pass);
-                empUI.pack();
-                empUI.setVisible(true);
-                this.setVisible(false);
-                frame_login.setVisible(false);
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem while executing query");
-            System.out.println(e.getMessage());
-        }
-            
-            
-        } else if(user.equals("manager")){
-            try {
-            c.prep = c.conn.prepareStatement("SELECT managername, pass from manager WHERE managername=? AND pass=?");
-            c.prep.setString(1, name);
-            c.prep.setString(2,pass);
-            c.rs = c.prep.executeQuery();// only for select queries
-            System.out.println("Query executed successfully");
-            if(!c.rs.next()){
-                System.out.println("Username or password is incorrect.");
-                JOptionPane.showMessageDialog(this, "Username or password is incorrect");
-            } else{
-                JOptionPane.showMessageDialog(this, "Logged in as " + user +": " + name);
-                ManagerUI mngUI = new ManagerUI();
-                mngUI.pack();
-                mngUI.setVisible(true);
-                this.setVisible(false);
-                frame_login.setVisible(false);
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem while executing query");
-            System.out.println(e.getMessage());
-        }
+        c.validateLogin( user, txt_name_login.getText(),String.valueOf(txt_pass_login.getPassword()), this, frame_login);
            
-        }
+        
     }//GEN-LAST:event_btn_loginActionPerformed
-
-    private void txt_pass_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pass_loginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_pass_loginActionPerformed
 
     private void btn_reg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reg1ActionPerformed
         Connector c = new Connector();
-        String name = txt_name.getText();
-        String pass = String.valueOf(txt_pass.getPassword());
         if(user.equals("employee")){
-            c.runDML("INSERT INTO employee (id, empname,pass, salary) values(0,'"+name+"','"+pass+"',0)");
+            c.runDML("INSERT INTO employee (id, empname,pass, salary) values(0,'"+txt_name.getText()+"','"+String.valueOf(txt_pass.getPassword())+"',0)");
             JOptionPane.showMessageDialog(this, "You have successfully registered. Please login to continue.");
             frame_reg.setVisible(false);
 
         } else if(user.equals("manager")){
-            c.runDML("INSERT INTO manager (id, managername,pass, salary) values(0,'"+name+"','"+pass+"',0)");
+            c.runDML("INSERT INTO manager (id, managername,pass, salary) values(0,'"+txt_name.getText()+"','"+String.valueOf(txt_pass.getPassword())+"',0)");
             JOptionPane.showMessageDialog(this, "You have successfully registered. Please login to continue.");
             frame_reg.setVisible(false);
 
         }
     }//GEN-LAST:event_btn_reg1ActionPerformed
+
+    private void menu_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_adminMouseClicked
+        frame_login.pack();
+        frame_login.setVisible(true);
+        user = "admin";
+    }//GEN-LAST:event_menu_adminMouseClicked
 
     /**
      * @param args the command line arguments
@@ -570,12 +519,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JMenu menu_admin;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_reg;
     private javax.swing.JButton reg_manager;

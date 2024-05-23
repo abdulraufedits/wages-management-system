@@ -165,9 +165,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="txt_pass_login">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_pass_loginActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -347,10 +344,13 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="menu_admin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Login as Admin"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_adminMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
