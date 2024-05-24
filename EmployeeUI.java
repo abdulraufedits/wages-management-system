@@ -74,6 +74,30 @@ public class EmployeeUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        frame_add_garment = new javax.swing.JFrame();
+        jLabel7 = new javax.swing.JLabel();
+        txt_brand = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_color = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txt_type = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txt_quality = new javax.swing.JTextField();
+        txt_cost = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btn_add_garment1 = new javax.swing.JButton();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        frame_del_garment = new javax.swing.JFrame();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txt_del_garment = new javax.swing.JTextField();
+        btn_del_garment1 = new javax.swing.JButton();
+        btn_del_garment_all = new javax.swing.JButton();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         empPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -88,6 +112,8 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         garmentsTable = new javax.swing.JTable();
+        btn_add_garment = new javax.swing.JButton();
+        btn_del_garment = new javax.swing.JButton();
         accPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -105,6 +131,157 @@ public class EmployeeUI extends javax.swing.JFrame {
         btn_acc = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_logout = new javax.swing.JMenu();
+
+        frame_add_garment.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Add a garment");
+
+        jLabel8.setText("Brand name");
+
+        jLabel9.setText("Color");
+
+        jLabel10.setText("Type");
+
+        jLabel11.setText("Quality");
+
+        jLabel12.setText("Cost");
+
+        jLabel13.setText("$");
+
+        btn_add_garment1.setBackground(new java.awt.Color(102, 102, 255));
+        btn_add_garment1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_add_garment1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add_garment1.setText("Add Garment");
+        btn_add_garment1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_garment1ActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("Close");
+        jMenuBar2.add(jMenu1);
+
+        frame_add_garment.setJMenuBar(jMenuBar2);
+
+        javax.swing.GroupLayout frame_add_garmentLayout = new javax.swing.GroupLayout(frame_add_garment.getContentPane());
+        frame_add_garment.getContentPane().setLayout(frame_add_garmentLayout);
+        frame_add_garmentLayout.setHorizontalGroup(
+            frame_add_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_add_garmentLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addGroup(frame_add_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_add_garment1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addGroup(frame_add_garmentLayout.createSequentialGroup()
+                        .addGroup(frame_add_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_brand)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_color)
+                            .addComponent(jLabel9)
+                            .addComponent(txt_type)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(txt_quality)
+                            .addComponent(txt_cost)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)))
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        frame_add_garmentLayout.setVerticalGroup(
+            frame_add_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_add_garmentLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel7)
+                .addGap(61, 61, 61)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_color, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_type, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_quality, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(frame_add_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addComponent(btn_add_garment1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setText("Delete a garment");
+
+        jLabel15.setText("Delete by Garment no");
+
+        btn_del_garment1.setBackground(new java.awt.Color(255, 51, 51));
+        btn_del_garment1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_del_garment1.setText("Delete");
+        btn_del_garment1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_garment1ActionPerformed(evt);
+            }
+        });
+
+        btn_del_garment_all.setBackground(new java.awt.Color(232, 232, 232));
+        btn_del_garment_all.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_del_garment_all.setForeground(new java.awt.Color(255, 51, 51));
+        btn_del_garment_all.setText("Delete all");
+        btn_del_garment_all.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_garment_allActionPerformed(evt);
+            }
+        });
+
+        jMenu2.setText("Close");
+        jMenuBar3.add(jMenu2);
+
+        frame_del_garment.setJMenuBar(jMenuBar3);
+
+        javax.swing.GroupLayout frame_del_garmentLayout = new javax.swing.GroupLayout(frame_del_garment.getContentPane());
+        frame_del_garment.getContentPane().setLayout(frame_del_garmentLayout);
+        frame_del_garmentLayout.setHorizontalGroup(
+            frame_del_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_del_garmentLayout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addGroup(frame_del_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_del_garment1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_del_garment, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_del_garment_all, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(frame_del_garmentLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        frame_del_garmentLayout.setVerticalGroup(
+            frame_del_garmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_del_garmentLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel14)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(txt_del_garment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_del_garment1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_del_garment_all, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -213,15 +390,41 @@ public class EmployeeUI extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(garmentsTable);
 
+        btn_add_garment.setBackground(new java.awt.Color(102, 102, 255));
+        btn_add_garment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_add_garment.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add_garment.setText("Add");
+        btn_add_garment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_garmentActionPerformed(evt);
+            }
+        });
+
+        btn_del_garment.setBackground(new java.awt.Color(255, 0, 0));
+        btn_del_garment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_del_garment.setForeground(new java.awt.Color(255, 255, 255));
+        btn_del_garment.setText("Delete");
+        btn_del_garment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_garmentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout garmentsPanelLayout = new javax.swing.GroupLayout(garmentsPanel);
         garmentsPanel.setLayout(garmentsPanelLayout);
         garmentsPanelLayout.setHorizontalGroup(
             garmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(garmentsPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(garmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(garmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addGroup(garmentsPanelLayout.createSequentialGroup()
+                        .addComponent(btn_del_garment, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_add_garment, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(garmentsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(624, 624, 624)))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         garmentsPanelLayout.setVerticalGroup(
@@ -229,9 +432,13 @@ public class EmployeeUI extends javax.swing.JFrame {
             .addGroup(garmentsPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3)
-                .addGap(49, 49, 49)
+                .addGap(2, 2, 2)
+                .addGroup(garmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_add_garment, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_del_garment, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         accPanel.setVisible(false);
@@ -491,6 +698,35 @@ public class EmployeeUI extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_menu_logoutMouseClicked
 
+    private void btn_add_garmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_garmentActionPerformed
+        frame_add_garment.pack();
+        frame_add_garment.setVisible(true);
+        
+    }//GEN-LAST:event_btn_add_garmentActionPerformed
+
+    private void btn_add_garment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_garment1ActionPerformed
+       Connector c = new Connector();
+        c.runDML("INSERT into garment (garmentno,brand, color,type,quality,cost)values(0,'"+txt_brand.getText()+ "','"+ txt_color.getText()+ "','"+ txt_type.getText()+ "','"+txt_quality.getText()+"','"+ txt_cost.getText()+"')");
+        frame_add_garment.setVisible(false);
+    }//GEN-LAST:event_btn_add_garment1ActionPerformed
+
+    private void btn_del_garment_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_garment_allActionPerformed
+        Connector c = new Connector();
+        c.runDML("DELETE FROM garment");
+        frame_del_garment.setVisible(false);
+    }//GEN-LAST:event_btn_del_garment_allActionPerformed
+
+    private void btn_del_garment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_garment1ActionPerformed
+        Connector c = new Connector();
+        c.runDML("DELETE FROM garment WHERE garmentno="+ txt_del_garment.getText());
+        frame_del_garment.setVisible(false);
+    }//GEN-LAST:event_btn_del_garment1ActionPerformed
+
+    private void btn_del_garmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_garmentActionPerformed
+        frame_del_garment.pack();
+        frame_del_garment.setVisible(true);
+    }//GEN-LAST:event_btn_del_garmentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,21 +765,41 @@ public class EmployeeUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accPanel;
     private javax.swing.JButton btn_acc;
+    private javax.swing.JButton btn_add_garment;
+    private javax.swing.JButton btn_add_garment1;
     private javax.swing.JButton btn_del_acc;
+    private javax.swing.JButton btn_del_garment;
+    private javax.swing.JButton btn_del_garment1;
+    private javax.swing.JButton btn_del_garment_all;
     private javax.swing.JButton btn_garments;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_update_name;
     private javax.swing.JButton btn_update_pass;
     private javax.swing.JPanel empPanel;
+    private javax.swing.JFrame frame_add_garment;
+    private javax.swing.JFrame frame_del_garment;
     private javax.swing.JPanel garmentsPanel;
     private javax.swing.JTable garmentsTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField13;
@@ -551,12 +807,18 @@ public class EmployeeUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JMenu menu_logout;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JTextField txt_brand;
+    private javax.swing.JTextField txt_color;
+    private javax.swing.JTextField txt_cost;
+    private javax.swing.JTextField txt_del_garment;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_name_current;
     private javax.swing.JTextField txt_name_new;
     private javax.swing.JTextField txt_pass_current;
     private javax.swing.JTextField txt_pass_new;
+    private javax.swing.JTextField txt_quality;
     private javax.swing.JTextField txt_sal;
+    private javax.swing.JTextField txt_type;
     // End of variables declaration//GEN-END:variables
 }

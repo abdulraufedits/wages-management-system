@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Connector {
 
@@ -148,6 +149,28 @@ public class Connector {
         
         } else {
             System.out.println("No action taken.");
+        }
+    }
+    
+    public void updateJTable(String query, JTable table,String ID,String name,String salary){
+        try{
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setRowCount(0);
+            prep = conn.prepareStatement(query);
+            rs = prep.executeQuery();
+            
+            while(rs.next()){
+            String[] tbData = {rs.getString(ID), rs.getString(name), rs.getString(salary)};
+            
+            DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+            tblModel.addRow(tbData);
+            
+            }
+            
+            
+        } catch (SQLException e) {
+            System.out.println("Problem while executing query");
+            System.out.println(e.getMessage());
         }
     }
 }

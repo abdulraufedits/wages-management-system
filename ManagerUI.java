@@ -40,26 +40,7 @@ public class ManagerUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
          Connector c2 = new Connector();
-        try{
-            c2.prep =c2.conn.prepareStatement("SELECT * from employee");
-            c2.rs = c2.prep.executeQuery();
-            
-            while(c2.rs.next()){
-                String ID = c2.rs.getString("id");
-            String empname = c2.rs.getString("empname");
-            String empsalary = c2.rs.getString("salary");
-            String[] tbData = {ID, empname, empsalary};
-            
-            DefaultTableModel tblModel = (DefaultTableModel)empTable.getModel();
-            tblModel.addRow(tbData);
-            
-            }
-            
-            
-        } catch (SQLException e) {
-            System.out.println("Problem while executing query");
-            System.out.println(e.getMessage());
-        }
+        c2.updateJTable("SELECT * from employee", empTable,"id", "empname", "salary");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +51,25 @@ public class ManagerUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        frame_add_emp = new javax.swing.JFrame();
+        jLabel7 = new javax.swing.JLabel();
+        txt_empname = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_emppass = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txt_empsal = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btn_add_emp1 = new javax.swing.JButton();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        frame_del_emp = new javax.swing.JFrame();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txt_del_emp = new javax.swing.JTextField();
+        btn_del_emp1 = new javax.swing.JButton();
+        btn_del_emp_all = new javax.swing.JButton();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         managerPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -84,6 +84,8 @@ public class ManagerUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         empTable = new javax.swing.JTable();
+        btn_add_emp = new javax.swing.JButton();
+        btn_del_emp = new javax.swing.JButton();
         accPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -101,6 +103,134 @@ public class ManagerUI extends javax.swing.JFrame {
         btn_acc = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_logout = new javax.swing.JMenu();
+
+        frame_add_emp.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Add an Employee");
+
+        jLabel8.setText("Employee name");
+
+        jLabel9.setText("Password");
+
+        jLabel10.setText("Salary");
+
+        btn_add_emp1.setBackground(new java.awt.Color(102, 102, 255));
+        btn_add_emp1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_add_emp1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add_emp1.setText("Add Employee");
+        btn_add_emp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_emp1ActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("Close");
+        jMenuBar2.add(jMenu1);
+
+        frame_add_emp.setJMenuBar(jMenuBar2);
+
+        javax.swing.GroupLayout frame_add_empLayout = new javax.swing.GroupLayout(frame_add_emp.getContentPane());
+        frame_add_emp.getContentPane().setLayout(frame_add_empLayout);
+        frame_add_empLayout.setHorizontalGroup(
+            frame_add_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_add_empLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addGroup(frame_add_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_empname)
+                    .addComponent(txt_emppass)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_empsal)
+                    .addComponent(jLabel10)
+                    .addComponent(btn_add_emp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
+        );
+        frame_add_empLayout.setVerticalGroup(
+            frame_add_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_add_empLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel7)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_empname, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_emppass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_empsal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btn_add_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setText("Delete an Employee");
+
+        jLabel15.setText("Delete by id");
+
+        btn_del_emp1.setBackground(new java.awt.Color(255, 51, 51));
+        btn_del_emp1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_del_emp1.setText("Delete");
+        btn_del_emp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_emp1ActionPerformed(evt);
+            }
+        });
+
+        btn_del_emp_all.setBackground(new java.awt.Color(232, 232, 232));
+        btn_del_emp_all.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_del_emp_all.setForeground(new java.awt.Color(255, 51, 51));
+        btn_del_emp_all.setText("Delete all");
+        btn_del_emp_all.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_emp_allActionPerformed(evt);
+            }
+        });
+
+        jMenu2.setText("Close");
+        jMenuBar3.add(jMenu2);
+
+        frame_del_emp.setJMenuBar(jMenuBar3);
+
+        javax.swing.GroupLayout frame_del_empLayout = new javax.swing.GroupLayout(frame_del_emp.getContentPane());
+        frame_del_emp.getContentPane().setLayout(frame_del_empLayout);
+        frame_del_empLayout.setHorizontalGroup(
+            frame_del_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_del_empLayout.createSequentialGroup()
+                .addGroup(frame_del_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(frame_del_empLayout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(frame_del_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_del_emp_all, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                            .addComponent(btn_del_emp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_del_emp)))
+                    .addGroup(frame_del_empLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(158, Short.MAX_VALUE))
+        );
+        frame_del_empLayout.setVerticalGroup(
+            frame_del_empLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frame_del_empLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel14)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(txt_del_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_del_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_del_emp_all, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -209,23 +339,56 @@ public class ManagerUI extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(empTable);
 
+        btn_add_emp.setBackground(new java.awt.Color(102, 102, 255));
+        btn_add_emp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_add_emp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add_emp.setText("Add");
+        btn_add_emp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_empActionPerformed(evt);
+            }
+        });
+
+        btn_del_emp.setBackground(new java.awt.Color(255, 0, 0));
+        btn_del_emp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_del_emp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_del_emp.setText("Delete");
+        btn_del_emp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_del_empActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout empPanelLayout = new javax.swing.GroupLayout(empPanel);
         empPanel.setLayout(empPanelLayout);
         empPanelLayout.setHorizontalGroup(
             empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(empPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addGroup(empPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_del_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_add_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         empPanelLayout.setVerticalGroup(
             empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(empPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel3)
-                .addGap(49, 49, 49)
+                .addGroup(empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(empPanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3)
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, empPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(empPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_add_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_del_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(219, Short.MAX_VALUE))
         );
@@ -486,6 +649,37 @@ public class ManagerUI extends javax.swing.JFrame {
         btn_home.setBackground(new java.awt.Color(230,230,230));btn_home.setForeground(Color.gray);btn_emp.setBackground(new java.awt.Color(230,230,230));btn_emp.setForeground(Color.gray);
     }//GEN-LAST:event_btn_accActionPerformed
 
+    private void btn_add_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_empActionPerformed
+        frame_add_emp.pack();
+        frame_add_emp.setVisible(true);
+
+    }//GEN-LAST:event_btn_add_empActionPerformed
+
+    private void btn_del_empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_empActionPerformed
+        frame_del_emp.pack();
+        frame_del_emp.setVisible(true);
+    }//GEN-LAST:event_btn_del_empActionPerformed
+
+    private void btn_add_emp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_emp1ActionPerformed
+        Connector c = new Connector();
+        c.runDML("INSERT into employee (id, empname, pass, salary)values(0,'"+txt_empname.getText()+ "','"+ txt_emppass.getText()+ "','"+ txt_empsal.getText()+"')");
+        c.updateJTable("SELECT * from employee", empTable,"id", "empname", "salary");
+        frame_add_emp.setVisible(false);
+    }//GEN-LAST:event_btn_add_emp1ActionPerformed
+
+    private void btn_del_emp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_emp1ActionPerformed
+        Connector c = new Connector();
+        c.runDML("DELETE FROM employee WHERE id="+ txt_del_emp.getText());
+        c.updateJTable("SELECT * from employee", empTable,"id", "empname", "salary");
+        frame_add_emp.setVisible(false);
+    }//GEN-LAST:event_btn_del_emp1ActionPerformed
+
+    private void btn_del_emp_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del_emp_allActionPerformed
+        Connector c = new Connector();
+        c.runDML("DELETE FROM employee");
+        c.updateJTable("SELECT * from employee", empTable,"id", "empname", "salary");
+    }//GEN-LAST:event_btn_del_emp_allActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,20 +713,37 @@ public class ManagerUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accPanel;
     private javax.swing.JButton btn_acc;
+    private javax.swing.JButton btn_add_emp;
+    private javax.swing.JButton btn_add_emp1;
     private javax.swing.JButton btn_del_acc;
+    private javax.swing.JButton btn_del_emp;
+    private javax.swing.JButton btn_del_emp1;
+    private javax.swing.JButton btn_del_emp_all;
     private javax.swing.JButton btn_emp;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_update_name;
     private javax.swing.JButton btn_update_pass;
     private javax.swing.JPanel empPanel;
     private javax.swing.JTable empTable;
+    private javax.swing.JFrame frame_add_emp;
+    private javax.swing.JFrame frame_del_emp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField13;
@@ -541,6 +752,10 @@ public class ManagerUI extends javax.swing.JFrame {
     private javax.swing.JPanel managerPanel;
     private javax.swing.JMenu menu_logout;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JTextField txt_del_emp;
+    private javax.swing.JTextField txt_empname;
+    private javax.swing.JTextField txt_emppass;
+    private javax.swing.JTextField txt_empsal;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_name_current;
